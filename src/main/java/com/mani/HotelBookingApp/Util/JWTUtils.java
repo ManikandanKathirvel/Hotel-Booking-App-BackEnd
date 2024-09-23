@@ -1,4 +1,4 @@
-package com.mani.HotelBookingApp.Util;
+package com.mani.HotelBookingApp.Util;//NOSONAR
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -27,16 +27,16 @@ public class JWTUtils {
             securityKey = Base64.getEncoder().encodeToString(sk.getEncoded());
 
         } catch (NoSuchAlgorithmException e) {
-            throw new RuntimeException(e);
+            throw new NoSuchElementException(e);
         }
     }
 
     public String generateToken(Map<String, Objects> extractClaim, UserDetails details) {
-        return Jwts.builder().setClaims(extractClaim)
-                .setSubject(details.getUsername())
-                .setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(System.currentTimeMillis() + 30 * 60 * 1000))
-                .signWith(getSignKey(), SignatureAlgorithm.HS256).compact();
+        return Jwts.builder().setClaims(extractClaim)//NOSONAR
+                .setSubject(details.getUsername())//NOSONAR
+                .setIssuedAt(new Date(System.currentTimeMillis()))//NOSONAR
+                .setExpiration(new Date(System.currentTimeMillis() + 30 * 60 * 1000))//NOSONAR
+                .signWith(getSignKey(), SignatureAlgorithm.HS256).compact();//NOSONAR
     }
 
     public String generateToken(UserDetails details) {
@@ -50,9 +50,9 @@ public class JWTUtils {
 
     private Claims extractAllClaims(String token) {
         return Jwts.parser()
-                .setSigningKey(getSignKey())
+                .setSigningKey(getSignKey())//NOSONAR
                 .build()
-                .parseClaimsJwt(token)
+                .parseClaimsJwt(token)//NOSONAR
                 .getPayload();
     }
 

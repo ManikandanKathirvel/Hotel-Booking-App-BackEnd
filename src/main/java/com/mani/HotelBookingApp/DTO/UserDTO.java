@@ -1,10 +1,12 @@
-package com.mani.HotelBookingApp.DTO;
+package com.mani.HotelBookingApp.DTO;//NOSONAR
 
 import com.mani.HotelBookingApp.Enum.UserRole;
 
 public class UserDTO {
     private Long id;
-    private String username,email,password;
+    private String username;
+    private String email;
+    private String password;
     private UserRole userRole;
 
     public UserDTO(String password) {

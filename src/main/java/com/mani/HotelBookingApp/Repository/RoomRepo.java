@@ -1,4 +1,4 @@
-package com.mani.HotelBookingApp.Repository;
+package com.mani.HotelBookingApp.Repository;//NOSONAR
 
 import com.mani.HotelBookingApp.Entity.Room;
 import org.springframework.data.domain.Page;

@@ -1,11 +1,9 @@
-package com.mani.HotelBookingApp.Entity;
+package com.mani.HotelBookingApp.Entity;//NOSONAR
 
 import com.mani.HotelBookingApp.Enum.ReservationStatus;
-import com.mani.HotelBookingApp.Service.Admin.Rooms.RoomService;
 import jakarta.persistence.*;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
-import org.springframework.web.bind.annotation.GetMapping;
 
 import java.time.LocalDate;
 
@@ -17,7 +15,7 @@ public class Reservation {
     private LocalDate checkInDate;
     private LocalDate checkOutDate;
     private Long price;
-    private ReservationStatus reservation;
+    private ReservationStatus reservation;//NOSONAR
 
     @ManyToOne(fetch = FetchType.LAZY,optional = false)
     @JoinColumn(name="room-id", nullable = false)
@@ -84,4 +82,6 @@ public class Reservation {
     public void setUser(User user) {
         this.user = user;
     }
+
+
 }

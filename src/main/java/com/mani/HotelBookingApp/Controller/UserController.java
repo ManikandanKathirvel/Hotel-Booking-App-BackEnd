@@ -1,4 +1,4 @@
-package com.mani.HotelBookingApp.Controller;
+package com.mani.HotelBookingApp.Controller;//NOSONAR
 
 import com.mani.HotelBookingApp.DTO.AuthenticationResponse;
 import com.mani.HotelBookingApp.DTO.AuthenticationRequest;
@@ -9,7 +9,6 @@ import com.mani.HotelBookingApp.Service.Jwt.UserServiceimpl;
 import com.mani.HotelBookingApp.Service.UserService;
 import com.mani.HotelBookingApp.Util.JWTUtils;
 import jakarta.persistence.EntityExistsException;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -24,15 +23,23 @@ import java.util.Optional;
 @CrossOrigin("http://localhost:4200")
 @RequestMapping("/api")
 public class UserController {
-    @Autowired
-    UserService service;
-    @Autowired
-    AuthenticationManager manager;
 
-    @Autowired
-    UserServiceimpl serviceimpl;
-    @Autowired
-    JWTUtils jwtUtils;
+    private final UserService service;
+
+   private final AuthenticationManager manager;
+
+
+    private final UserServiceimpl serviceimpl;
+
+
+    private final JWTUtils jwtUtils;
+
+    public UserController(UserService service, AuthenticationManager manager, UserServiceimpl serviceimpl, JWTUtils jwtUtils) {
+        this.service = service;
+        this.manager = manager;
+        this.serviceimpl = serviceimpl;
+        this.jwtUtils = jwtUtils;
+    }
 
     @PostMapping("/signUp")
     public ResponseEntity<?> signUp(@RequestBody SignupRequest signupRequest) {

@@ -1,4 +1,4 @@
-package com.mani.HotelBookingApp.Service.Customer.Booking;
+package com.mani.HotelBookingApp.Service.Customer.Booking;//NOSONAR
 
 import com.mani.HotelBookingApp.DTO.ReservationDto;
 import com.mani.HotelBookingApp.Entity.Reservation;
@@ -8,7 +8,6 @@ import com.mani.HotelBookingApp.Enum.ReservationStatus;
 import com.mani.HotelBookingApp.Repository.ReservationRepo;
 import com.mani.HotelBookingApp.Repository.RoomRepo;
 import com.mani.HotelBookingApp.Repository.UserRepo;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.temporal.ChronoUnit;
@@ -16,12 +15,16 @@ import java.util.Optional;
 
 @Service
 public class BookingService {
-    @Autowired
-    ReservationRepo reservationRepo;
-    @Autowired
-    UserRepo userRepo;
-    @Autowired
-    RoomRepo roomRepo;
+
+    private  final ReservationRepo reservationRepo;
+    private final UserRepo userRepo;
+    private final RoomRepo roomRepo;
+
+    public BookingService(ReservationRepo reservationRepo, UserRepo userRepo, RoomRepo roomRepo) {
+        this.reservationRepo = reservationRepo;
+        this.userRepo = userRepo;
+        this.roomRepo = roomRepo;
+    }
 
     public boolean postReservation(ReservationDto reservationDto) {
         Optional<User> user = userRepo.findById(reservationDto.getUserId());

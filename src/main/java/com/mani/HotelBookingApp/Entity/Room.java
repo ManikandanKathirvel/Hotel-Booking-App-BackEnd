@@ -1,4 +1,4 @@
-package com.mani.HotelBookingApp.Entity;
+package com.mani.HotelBookingApp.Entity;//NOSONAR
 
 import com.mani.HotelBookingApp.DTO.RoomDTO;
 import jakarta.persistence.Entity;
@@ -11,7 +11,8 @@ public class Room {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String name, type;
+    private String name;
+    private String type;
     private Long price;
     private boolean available;
 

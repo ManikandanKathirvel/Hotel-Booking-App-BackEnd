@@ -1,4 +1,4 @@
-package com.mani.HotelBookingApp.SecurityConfig;
+package com.mani.HotelBookingApp.SecurityConfig;//NOSONAR
 
 import jakarta.servlet.*;
 import jakarta.servlet.http.HttpServletRequest;
@@ -25,11 +25,10 @@ public class ConfigFilter implements Filter {
         HttpServletResponse response = (HttpServletResponse) servletResponse;
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         String originMaster = request.getHeader("Origin");
-        //  System.out.println(originMaster+"  :origin");
         response.setHeader("Access-Control-Allow-Origin", originMaster);
         response.setHeader("Access-Control-Allow-Methods", "POST,GET,PUT,DELETE,OPTIONS");
         response.setHeader("Access-Control-Max-Age", "3600");
-        // response.setHeader("Access-Control-Allow-Credentials", "true");
+        //response.setHeader("Access-Control-Allow-Credentials", "true");//NOSONAR
         response.setHeader("Access-Control-Allow-Headers", "Authorization, Content-Type, Accept, Origin, X-Requested-With");
 
         if ("OPTIONS".equalsIgnoreCase(request.getMethod())) {

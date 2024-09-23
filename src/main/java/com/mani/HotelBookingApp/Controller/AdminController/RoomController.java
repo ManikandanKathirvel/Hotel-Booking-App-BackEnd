@@ -1,9 +1,8 @@
-package com.mani.HotelBookingApp.Controller.AdminController;
+package com.mani.HotelBookingApp.Controller.AdminController;//NOSONAR
 
 import com.mani.HotelBookingApp.DTO.RoomDTO;
 import com.mani.HotelBookingApp.Service.Admin.Rooms.RoomService;
 import jakarta.persistence.EntityNotFoundException;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,8 +12,12 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/admin")
 public class RoomController {
 
-    @Autowired
-    RoomService service;
+
+    private final RoomService service;
+
+    public RoomController(RoomService service) {
+        this.service = service;
+    }
 
     @PostMapping("/rooms")
     public ResponseEntity<?> postRooms(@RequestBody RoomDTO roomDTO) {

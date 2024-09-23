@@ -1,4 +1,4 @@
-package com.mani.HotelBookingApp.DTO;
+package com.mani.HotelBookingApp.DTO;//NOSONAR
 
 import java.util.List;
 

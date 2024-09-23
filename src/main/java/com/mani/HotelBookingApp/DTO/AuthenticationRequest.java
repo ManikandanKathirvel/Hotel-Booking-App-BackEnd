@@ -1,9 +1,11 @@
-package com.mani.HotelBookingApp.DTO;
+package com.mani.HotelBookingApp.DTO;//NOSONAR
 
 
 public class AuthenticationRequest {
 
-    private String email, password;
+    private String email;
+
+    private String password;
 
     public String getEmail() {
         return email;

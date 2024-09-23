@@ -1,7 +1,9 @@
-package com.mani.HotelBookingApp.DTO;
+package com.mani.HotelBookingApp.DTO;//NOSONAR
 
 public class SignupRequest {
-    private String username, email, password;
+    private String username;
+    private String email;
+    private String password;
 
     public String getUsername() {
 

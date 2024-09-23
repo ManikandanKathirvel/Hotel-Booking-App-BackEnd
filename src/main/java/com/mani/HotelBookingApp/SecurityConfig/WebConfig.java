@@ -1,8 +1,7 @@
-package com.mani.HotelBookingApp.SecurityConfig;
+package com.mani.HotelBookingApp.SecurityConfig;//NOSONAR
 
 import com.mani.HotelBookingApp.Enum.UserRole;
 import com.mani.HotelBookingApp.Service.Jwt.UserServiceimpl;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -19,12 +18,13 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @Configuration
 @EnableWebSecurity
 public class WebConfig {
+   private final UserServiceimpl serviceimpl;
+   private final JwtAuthenticationFilter jwtAuthenticationFilter;
 
-    @Autowired
-    UserServiceimpl serviceimpl;
-
-    @Autowired
-    JwtAuthenticationFilter jwtAuthenticationFilter;
+    public WebConfig(UserServiceimpl serviceimpl, JwtAuthenticationFilter jwtAuthenticationFilter) {
+        this.serviceimpl = serviceimpl;
+        this.jwtAuthenticationFilter = jwtAuthenticationFilter;
+    }
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {

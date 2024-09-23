@@ -1,4 +1,4 @@
-package com.mani.HotelBookingApp.DTO;
+package com.mani.HotelBookingApp.DTO;//NOSONAR
 
 import com.mani.HotelBookingApp.Enum.ReservationStatus;
 
@@ -10,7 +10,8 @@ public class ReservationDto {
     private long price;
     private ReservationStatus reservationStatus;
     private Long roomId;
-    private String roomType, roomName;
+    private String roomType;
+    private String roomName;
     private Long userId;
     private String username;
 

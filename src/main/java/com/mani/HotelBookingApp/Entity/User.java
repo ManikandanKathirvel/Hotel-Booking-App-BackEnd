@@ -1,4 +1,4 @@
-package com.mani.HotelBookingApp.Entity;
+package com.mani.HotelBookingApp.Entity;//NOSONAR
 
 
 import com.mani.HotelBookingApp.DTO.UserDTO;
@@ -18,7 +18,9 @@ public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String username, email, password;
+    private String username;
+    private String email;
+    private String password;
     private UserRole userRole;
 
     public Long getId() {

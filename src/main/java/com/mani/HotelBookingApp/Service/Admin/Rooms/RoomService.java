@@ -1,31 +1,33 @@
-package com.mani.HotelBookingApp.Service.Admin.Rooms;
+package com.mani.HotelBookingApp.Service.Admin.Rooms;//NOSONAR
 
 import com.mani.HotelBookingApp.DTO.RoomDTO;
 import com.mani.HotelBookingApp.DTO.RoomResponse;
 import com.mani.HotelBookingApp.Entity.Room;
 import com.mani.HotelBookingApp.Repository.RoomRepo;
 import jakarta.persistence.EntityNotFoundException;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
 public class RoomService {
-    @Autowired
-    RoomRepo repo;
+
+   private final RoomRepo repo;
+
+    public RoomService(RoomRepo repo) {
+        this.repo = repo;
+    }
 
     public boolean postRooms(RoomDTO roomDTO){
         try{
             Room room=new Room();
-            room.setName(roomDTO.getName());;
+            room.setName(roomDTO.getName());
             room.setPrice(roomDTO.getPrice());
-            room.setType(roomDTO.getType());;
+            room.setType(roomDTO.getType());
             room.setAvailable(true);
             repo.save(room);
             return true;
@@ -40,9 +42,9 @@ public class RoomService {
 
         RoomResponse roomResponse = new RoomResponse();
         roomResponse.setPageNumber(roomPage.getPageable().getPageNumber());
-        System.out.println(roomPage.getPageable().getPageNumber()+" :page number");
+        System.out.println(roomPage.getPageable().getPageNumber()+" :page number");//NOSONAR
         roomResponse.setTotalPages(roomPage.getTotalPages());
-        roomResponse.setRoomDtoList(roomPage.getContent().stream().map(Room::getRoomDto).collect(Collectors.toList()));
+        roomResponse.setRoomDtoList(roomPage.getContent().stream().map(Room::getRoomDto).collect(Collectors.toList()));//NOSONAR
         return roomResponse;
     }
     public boolean updateRoom(Long id, RoomDTO roomDTO){

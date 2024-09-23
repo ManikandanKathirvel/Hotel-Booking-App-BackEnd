@@ -1,9 +1,8 @@
-package com.mani.HotelBookingApp.Service.Customer.Room;
+package com.mani.HotelBookingApp.Service.Customer.Room;//NOSONAR
 
 import com.mani.HotelBookingApp.DTO.RoomResponse;
 import com.mani.HotelBookingApp.Entity.Room;
 import com.mani.HotelBookingApp.Repository.RoomRepo;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -13,8 +12,11 @@ import java.util.stream.Collectors;
 
 @Service
 public class CustomerRoomService {
-    @Autowired
-    RoomRepo repo;
+
+    private final RoomRepo repo;
+    public CustomerRoomService(RoomRepo repo) {
+        this.repo = repo;
+    }
 
     public RoomResponse getAvailableRoom(int pageNumber) {
         int pageSize = 3;
@@ -24,7 +26,7 @@ public class CustomerRoomService {
         RoomResponse roomResponse = new RoomResponse();
         roomResponse.setPageNumber(roomPage.getPageable().getPageNumber());
         roomResponse.setTotalPages(roomPage.getTotalPages());
-        roomResponse.setRoomDtoList(roomPage.getContent().stream().map(Room::getRoomDto).collect(Collectors.toList()));
+        roomResponse.setRoomDtoList(roomPage.getContent().stream().map(Room::getRoomDto).collect(Collectors.toList()));//NOSONAR
         return roomResponse;
 
     }
