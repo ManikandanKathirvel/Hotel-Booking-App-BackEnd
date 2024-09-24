@@ -5,6 +5,7 @@ import com.mani.HotelBookingApp.Enum.ReservationStatus;
 import java.time.LocalDate;
 
 public class ReservationDto {
+    private Long id;
     private LocalDate checkInDate;
     private LocalDate checkOutDate;
     private long price;
@@ -14,6 +15,14 @@ public class ReservationDto {
     private String roomName;
     private Long userId;
     private String username;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public LocalDate getCheckInDate() {
         return checkInDate;

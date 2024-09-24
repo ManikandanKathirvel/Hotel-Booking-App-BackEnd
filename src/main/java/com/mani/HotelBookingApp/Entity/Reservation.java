@@ -1,5 +1,6 @@
 package com.mani.HotelBookingApp.Entity;//NOSONAR
 
+import com.mani.HotelBookingApp.DTO.ReservationDto;
 import com.mani.HotelBookingApp.Enum.ReservationStatus;
 import jakarta.persistence.*;
 import org.hibernate.annotations.OnDelete;
@@ -15,7 +16,7 @@ public class Reservation {
     private LocalDate checkInDate;
     private LocalDate checkOutDate;
     private Long price;
-    private ReservationStatus reservation;//NOSONAR
+    private ReservationStatus reservationStatus;//NOSONAR
 
     @ManyToOne(fetch = FetchType.LAZY,optional = false)
     @JoinColumn(name="room-id", nullable = false)
@@ -60,11 +61,11 @@ public class Reservation {
     }
 
     public ReservationStatus getReservation() {
-        return reservation;
+        return reservationStatus;
     }
 
     public void setReservation(ReservationStatus reservation) {
-        this.reservation = reservation;
+        this.reservationStatus = reservation;
     }
 
     public Room getRoom() {
@@ -84,4 +85,22 @@ public class Reservation {
     }
 
 
+    public ReservationDto getReservationDto(){
+        ReservationDto reservationDto=new ReservationDto();
+        reservationDto.setId(id);
+        reservationDto.setPrice(price);
+        reservationDto.setCheckInDate(checkInDate);
+        reservationDto.setCheckOutDate(checkOutDate);
+        reservationDto.setReservationStatus(reservationStatus);
+
+        reservationDto.setUserId(user.getId());
+        reservationDto.setUsername(user.getUsername());
+
+        reservationDto.setRoomId(room.getId());
+        reservationDto.setRoomName(room.getName());
+        reservationDto.setRoomType(room.getType());
+
+        return reservationDto;
+
+    }
 }
