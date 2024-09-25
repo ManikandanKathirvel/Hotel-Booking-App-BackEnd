@@ -25,28 +25,31 @@ public class ReservationService {
         this.reservationRepo = reservationRepo;
         this.repo = repo;
     }
-    public static final int SEARCH_RESULT_PER_PAGE=4;
-    public ReservationResponseDto getALlReservation(int pageNo){
-        Pageable pageable= PageRequest.of(pageNo,SEARCH_RESULT_PER_PAGE);
-        Page<Reservation> reservationPage=reservationRepo.findAll(pageable);
-        ReservationResponseDto reservationResponseDto=new ReservationResponseDto();
+
+    public static final int SEARCH_RESULT_PER_PAGE = 4;
+
+    public ReservationResponseDto getALlReservation(int pageNo) {
+        Pageable pageable = PageRequest.of(pageNo, SEARCH_RESULT_PER_PAGE);
+        Page<Reservation> reservationPage = reservationRepo.findAll(pageable);
+        ReservationResponseDto reservationResponseDto = new ReservationResponseDto();
         reservationResponseDto.setReservationDto(reservationPage.stream().map(Reservation::getReservationDto).collect(Collectors.toList()));
         reservationResponseDto.setPageNo(reservationPage.getPageable().getPageNumber());
         reservationResponseDto.setTotalPages(reservationPage.getTotalPages());
         return reservationResponseDto;
     }
-    public boolean changeReservationStatus(Long id,String status){
-        Optional<Reservation> reservation=reservationRepo.findById(id);
-        if(reservation.isPresent()){
-            Reservation res=reservation.get();
-            if(Objects.equals(status,"Approve")){
-                res.setReservation(ReservationStatus.APPROVED);
-            }
-            else {
-                res.setReservation(ReservationStatus.REJECTED);
+
+    public boolean changeReservationStatus(Long id, String status) {
+        Optional<Reservation> reservation = reservationRepo.findById(id);
+        System.out.println(reservation.get());
+        if (reservation.isPresent()) {
+            Reservation res = reservation.get();
+            if (Objects.equals(status, "Approve")) {
+                res.setReservationStatus(ReservationStatus.APPROVED);
+            } else {
+                res.setReservationStatus(ReservationStatus.REJECTED);
             }
             reservationRepo.save(res);
-            Room room=res.getRoom();
+            Room room = res.getRoom();
             room.setAvailable(false);
             repo.save(room);
             return true;

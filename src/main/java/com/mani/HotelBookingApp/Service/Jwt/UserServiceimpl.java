@@ -15,7 +15,7 @@ public class UserServiceimpl {
         this.repo = repo;
     }
 
-    public UserDetailsService userDetailsService(){
+    public UserDetailsService userDetailsService() {
         return new UserDetailsService() {
             @Override
             public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {

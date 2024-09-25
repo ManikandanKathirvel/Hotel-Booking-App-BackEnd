@@ -26,7 +26,7 @@ public class UserController {
 
     private final UserService service;
 
-   private final AuthenticationManager manager;
+    private final AuthenticationManager manager;
 
 
     private final UserServiceimpl serviceimpl;

@@ -1,10 +1,10 @@
-package com.mani.HotelBookingApp.DTO;
+package com.mani.HotelBookingApp.DTO;//NOSONAR
 
 import java.util.List;
 
 public class ReservationResponseDto {
     private Integer totalPages;
-    private  Integer pageNo;
+    private Integer pageNo;
     private List<ReservationDto> reservationDto;
 
     public Integer getTotalPages() {

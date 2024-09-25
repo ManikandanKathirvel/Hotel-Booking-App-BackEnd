@@ -18,13 +18,13 @@ public class Reservation {
     private Long price;
     private ReservationStatus reservationStatus;//NOSONAR
 
-    @ManyToOne(fetch = FetchType.LAZY,optional = false)
-    @JoinColumn(name="room-id", nullable = false)
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "room-id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Room room;
 
-    @ManyToOne(fetch = FetchType.LAZY,optional = false)
-    @JoinColumn(name="user-id", nullable = false)
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "user-id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     private User user;
 
@@ -64,8 +64,8 @@ public class Reservation {
         return reservationStatus;
     }
 
-    public void setReservation(ReservationStatus reservation) {
-        this.reservationStatus = reservation;
+    public void setReservationStatus(ReservationStatus reservationStatus) {
+        this.reservationStatus = reservationStatus;
     }
 
     public Room getRoom() {
@@ -85,8 +85,8 @@ public class Reservation {
     }
 
 
-    public ReservationDto getReservationDto(){
-        ReservationDto reservationDto=new ReservationDto();
+    public ReservationDto getReservationDto() {
+        ReservationDto reservationDto = new ReservationDto();
         reservationDto.setId(id);
         reservationDto.setPrice(price);
         reservationDto.setCheckInDate(checkInDate);

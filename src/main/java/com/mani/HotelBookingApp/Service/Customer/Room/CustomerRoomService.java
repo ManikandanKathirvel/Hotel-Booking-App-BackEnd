@@ -14,6 +14,7 @@ import java.util.stream.Collectors;
 public class CustomerRoomService {
 
     private final RoomRepo repo;
+
     public CustomerRoomService(RoomRepo repo) {
         this.repo = repo;
     }
