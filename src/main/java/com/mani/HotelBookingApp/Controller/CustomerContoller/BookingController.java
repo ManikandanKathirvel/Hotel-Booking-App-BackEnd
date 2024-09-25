@@ -1,6 +1,7 @@
 package com.mani.HotelBookingApp.Controller.CustomerContoller;//NOSONAR
 
 import com.mani.HotelBookingApp.DTO.ReservationDto;
+import com.mani.HotelBookingApp.Exceptions.ResourceNotFoundException;
 import com.mani.HotelBookingApp.Service.Customer.Booking.BookingService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,14 +22,14 @@ public class BookingController {
         if (success) {
             return ResponseEntity.status(HttpStatus.OK).build();
         }
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Bad Request");
+        throw new IllegalArgumentException("Request Invalid");
     }
     @GetMapping("/bookings/{userId}/{pageNo}")
-    public  ResponseEntity<?> getAllBookingUserId(@PathVariable Long userId,@PathVariable int pageNo){
+    public  ResponseEntity<?> getAllBookingUserId(@PathVariable Long userId,@PathVariable int pageNo) throws ResourceNotFoundException {
         try{
             return  ResponseEntity.ok(bookingService.getAllReservationByUserId(userId,pageNo));
         }catch (Exception e){
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Uer not found");
+            throw new ResourceNotFoundException("Resource Not Found");
         }
     }
 }

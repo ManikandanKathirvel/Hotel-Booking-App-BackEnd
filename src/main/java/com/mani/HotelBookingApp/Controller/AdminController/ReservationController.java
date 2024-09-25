@@ -20,7 +20,7 @@ public class ReservationController {
         try {
             return ResponseEntity.ok(reservationService.getALlReservation(pageNo));
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("SOmething went worng");
+            throw new IllegalArgumentException("Invalid status or reservation ID");
         }
     }
 
@@ -31,7 +31,7 @@ public class ReservationController {
         if (success) {
             return ResponseEntity.ok().build();
         } else {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Something went Wrong");
+            throw new IllegalArgumentException("Invalid status or reservation ID");
         }
     }
 }

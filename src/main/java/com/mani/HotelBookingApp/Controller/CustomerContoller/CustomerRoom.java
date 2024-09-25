@@ -1,5 +1,6 @@
 package com.mani.HotelBookingApp.Controller.CustomerContoller;
 
+import com.mani.HotelBookingApp.Exceptions.IllegalArgumentException;
 import com.mani.HotelBookingApp.Service.Customer.Room.CustomerRoomService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -15,7 +16,7 @@ public class CustomerRoom {
     CustomerRoomService service;
 
     @GetMapping("/getroom/{pageNumber}")
-    public ResponseEntity<?> getAvailableRoom(@PathVariable int pageNumber) {
-        return ResponseEntity.ok(service.getAvailableRoom(pageNumber));
+    public ResponseEntity<?> getAvailableRoom(@PathVariable int pageNumber) throws IllegalArgumentException {
+        throw new IllegalArgumentException("Something went wrong");
     }
 }

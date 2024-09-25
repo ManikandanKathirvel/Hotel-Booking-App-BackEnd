@@ -1,6 +1,7 @@
 package com.mani.HotelBookingApp.Controller.AdminController;//NOSONAR
 
 import com.mani.HotelBookingApp.DTO.RoomDTO;
+import com.mani.HotelBookingApp.Exceptions.ResourceNotFoundException;
 import com.mani.HotelBookingApp.Service.Admin.Rooms.RoomService;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.http.HttpStatus;
@@ -25,7 +26,7 @@ public class RoomController {
         if (success) {
             return ResponseEntity.status(HttpStatus.OK).build();
         } else {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+            throw new IllegalArgumentException("Invalid Room Data");
         }
     }
 
@@ -46,12 +47,12 @@ public class RoomController {
     }
 
     @PutMapping("/updateRoom/{id}")
-    public ResponseEntity<?> updateRoom(@PathVariable Long id, @RequestBody RoomDTO roomDTO) {
+    public ResponseEntity<?> updateRoom(@PathVariable Long id, @RequestBody RoomDTO roomDTO) throws ResourceNotFoundException {
         boolean success = service.updateRoom(id, roomDTO);
         if (success) {
             return ResponseEntity.status(HttpStatus.OK).body(true);
         }
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("update failed");
+        throw new ResourceNotFoundException("Room not found with ID: " + id);
     }
 
     @DeleteMapping("/deleteRoom/{id}")
