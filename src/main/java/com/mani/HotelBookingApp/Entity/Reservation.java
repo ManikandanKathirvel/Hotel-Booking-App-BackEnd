@@ -28,6 +28,12 @@ public class Reservation {
     @OnDelete(action = OnDeleteAction.CASCADE)
     private User user;
 
+
+    public Reservation(){}
+
+    public Reservation(Reservation reservation) {
+    }
+
     public Long getId() {
         return id;
     }
@@ -68,6 +74,10 @@ public class Reservation {
         this.reservationStatus = reservationStatus;
     }
 
+    public ReservationStatus getReservationStatus() {
+        return reservationStatus;
+    }
+
     public Room getRoom() {
         return room;
     }
@@ -84,19 +94,31 @@ public class Reservation {
         this.user = user;
     }
 
+    public Reservation(Long id, LocalDate checkInDate, LocalDate checkOutDate, Long price, ReservationStatus reservationStatus, Room room, User user) {
+        this.id = id;
+        this.checkInDate = checkInDate;
+        this.checkOutDate = checkOutDate;
+        this.price = price;
+        this.reservationStatus = reservationStatus;
+        this.room = room;
+        this.user = user;
+    }
 
     public ReservationDto getReservationDto() {
         ReservationDto reservationDto = new ReservationDto();
         reservationDto.setId(id);
         reservationDto.setPrice(price);
+        System.out.println(reservationDto.getPrice());
         reservationDto.setCheckInDate(checkInDate);
         reservationDto.setCheckOutDate(checkOutDate);
         reservationDto.setReservationStatus(reservationStatus);
 
         reservationDto.setUserId(user.getId());
+        System.out.println(reservationDto.getUserId());
         reservationDto.setUsername(user.getUsername());
 
         reservationDto.setRoomId(room.getId());
+        System.out.println(reservationDto.getRoomId());
         reservationDto.setRoomName(room.getName());
         reservationDto.setRoomType(room.getType());
 

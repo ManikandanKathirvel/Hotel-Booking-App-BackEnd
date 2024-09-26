@@ -25,10 +25,8 @@ public class ReservationService {
         this.reservationRepo = reservationRepo;
         this.repo = repo;
     }
-
     public static final int SEARCH_RESULT_PER_PAGE = 4;
-
-    public ReservationResponseDto getALlReservation(int pageNo) {
+    public ReservationResponseDto getAllReservation(int pageNo) {
         Pageable pageable = PageRequest.of(pageNo, SEARCH_RESULT_PER_PAGE);
         Page<Reservation> reservationPage = reservationRepo.findAll(pageable);
         ReservationResponseDto reservationResponseDto = new ReservationResponseDto();
@@ -40,7 +38,6 @@ public class ReservationService {
 
     public boolean changeReservationStatus(Long id, String status) {
         Optional<Reservation> reservation = reservationRepo.findById(id);
-        System.out.println(reservation.get());
         if (reservation.isPresent()) {
             Reservation res = reservation.get();
             if (Objects.equals(status, "Approve")) {

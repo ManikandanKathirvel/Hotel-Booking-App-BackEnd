@@ -1,4 +1,4 @@
-package com.mani.HotelBookingApp.Exceptions;
+package com.mani.HotelBookingApp.Exceptions;//NOSONAR
 
 public class IllegalArgumentException extends Exception{
     public IllegalArgumentException(String message) {

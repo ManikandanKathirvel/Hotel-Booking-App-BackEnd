@@ -37,7 +37,6 @@ public class WebConfig {
                 .authenticationProvider(authenticationProvider()).addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
         return http.build();
     }
-
     @Bean
     public AuthenticationManager manager(AuthenticationConfiguration configuration) throws Exception {
         return configuration.getAuthenticationManager();

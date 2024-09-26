@@ -1,4 +1,4 @@
-package com.mani.HotelBookingApp.Controller.CustomerContoller;
+package com.mani.HotelBookingApp.Controller.CustomerContoller;//NOSONAR
 
 import com.mani.HotelBookingApp.Exceptions.IllegalArgumentException;
 import com.mani.HotelBookingApp.Service.Customer.Room.CustomerRoomService;

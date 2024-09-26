@@ -43,7 +43,6 @@ public class RoomService {
 
         RoomResponse roomResponse = new RoomResponse();
         roomResponse.setPageNumber(roomPage.getPageable().getPageNumber());
-        System.out.println(roomPage.getPageable().getPageNumber() + " :page number");//NOSONAR
         roomResponse.setTotalPages(roomPage.getTotalPages());
         roomResponse.setRoomDtoList(roomPage.getContent().stream().map(Room::getRoomDto).collect(Collectors.toList()));//NOSONAR
         return roomResponse;

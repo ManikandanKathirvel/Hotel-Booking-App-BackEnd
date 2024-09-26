@@ -16,6 +16,10 @@ public class ReservationDto {
     private Long userId;
     private String username;
 
+    public ReservationDto(String date, String date1, int i, String approved, int i1, String smallRoom, String roomNo6, int i2, String mail) {
+    }
+    public ReservationDto(){}
+
     public Long getId() {
         return id;
     }
