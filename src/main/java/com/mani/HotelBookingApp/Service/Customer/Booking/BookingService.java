@@ -35,8 +35,10 @@ public class BookingService {
     public boolean postReservation(ReservationDto reservationDto) {
         Optional<User> user = userRepo.findById(reservationDto.getUserId());
         Optional<Room> room = roomRepo.findById(reservationDto.getRoomId());
-
         if (room.isPresent() && user.isPresent()) {
+            if (reservationDto.getCheckOutDate().isBefore(reservationDto.getCheckInDate())) {
+                return false;
+            }
             Reservation reservation = new Reservation();
             reservation.setRoom(room.get());
             reservation.setUser(user.get());

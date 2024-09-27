@@ -102,7 +102,7 @@ public class User implements UserDetails {
     }
 
     public UserDTO getUserdto() {
-        UserDTO dto = new UserDTO(password);
+        UserDTO dto = new UserDTO();
         dto.setId(id);
         dto.setEmail(email);
         dto.setUsername(username);

@@ -17,6 +17,10 @@ public class CustomerRoom {
 
     @GetMapping("/getroom/{pageNumber}")
     public ResponseEntity<?> getAvailableRoom(@PathVariable int pageNumber) throws IllegalArgumentException {
-        throw new IllegalArgumentException("Something went wrong");
+        try{
+            return ResponseEntity.ok(service.getAvailableRoom(pageNumber));
+        }catch (Exception e) {
+            throw new IllegalArgumentException("Something went wrong");
+        }
     }
 }

@@ -18,14 +18,13 @@ import org.springframework.data.domain.PageRequest;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
-public class RoomServiceTest {
+ class RoomServiceTest {
     @InjectMocks
     RoomService service;
     @Mock
@@ -36,7 +35,7 @@ public class RoomServiceTest {
     }
 
     @Test
-    public void testPostRoom_Success(){
+     void testPostRoom_Success(){
         RoomDTO roomDTO = new RoomDTO();
         roomDTO.setName("Room No1");
         roomDTO.setType("AC");
@@ -46,12 +45,12 @@ public class RoomServiceTest {
         verify(roomRepo).save(any(Room.class));
     }
     @Test
-    public void testPostRoom_NullRoomDto(){
+     void testPostRoom_NullRoomDto(){
         boolean result=service.postRooms(null);
         assertFalse(result);
     }
     @Test
-    public void testPostRoom_RoomDTOWithNullPointer(){
+     void testPostRoom_RoomDTOWithNullPointer(){
         RoomDTO roomDTO= new RoomDTO();
         roomDTO.setName(null);
         roomDTO.setType(null);
@@ -60,7 +59,7 @@ public class RoomServiceTest {
         assertTrue(result);
     }
     @Test
-    public void testPostRoom_ExceptionDuringSave(){
+     void testPostRoom_ExceptionDuringSave(){
         RoomDTO roomDTO = new RoomDTO();
         roomDTO.setName("Room No1");
         roomDTO.setType("AC");
@@ -70,7 +69,7 @@ public class RoomServiceTest {
         assertFalse(result);
     }
     @Test
-    public void testPostRoom_NegativePrice(){
+     void testPostRoom_NegativePrice(){
         RoomDTO roomDTO=new RoomDTO();
         roomDTO.setPrice(-900L);
         roomDTO.setName("Room No1");
@@ -81,7 +80,7 @@ public class RoomServiceTest {
     }
 
     @Test
-    public void  testGetAllRooms_success(){
+     void  testGetAllRooms_success(){
         int pageNumber=0;
         int pageSize=4;
         Room room=new Room();
@@ -104,13 +103,13 @@ public class RoomServiceTest {
         when(roomRepo.findAll(PageRequest.of(pageNumber,pageSize))).thenReturn(roomPage);
 
         RoomResponse roomResponse= service.getAllRooms(pageNumber);
-        List<String> roomNames=roomResponse.getRoomDtoList().stream().map(RoomDTO::getName).collect(Collectors.toList());
+        List<String> roomNames=roomResponse.getRoomDtoList().stream().map(RoomDTO::getName).collect(Collectors.toList());//NOSONAR
         List<String> expectedRoomName=Arrays.asList("Room No1","Room No2");
         assertTrue(expectedRoomName.containsAll(roomNames));
         assertEquals(2,roomResponse.getRoomDtoList().size());
     }
     @Test
-    public void testGetAllRooms_EmptyPage(){
+     void testGetAllRooms_EmptyPage(){
         int pageNo=0;
         List<Room> rooms=Arrays.asList();
         Page<Room> roomPage=new PageImpl<>(rooms,PageRequest.of(pageNo,4),0);
@@ -119,7 +118,7 @@ public class RoomServiceTest {
         assertEquals(0,roomResponse.getRoomDtoList().size());
     }
     @Test
-    public void testGetAllRooms_PageNoOutOfBound(){
+     void testGetAllRooms_PageNoOutOfBound(){
         int pageNo=10;
         List<Room> rooms=Arrays.asList();
         Page<Room> roomPage = new PageImpl<>(rooms,PageRequest.of(pageNo,4),0);
@@ -132,7 +131,7 @@ public class RoomServiceTest {
     }
 
     @Test
-    public void testUpdateRooms_success(){
+     void testUpdateRooms_success(){
         Long roomId=1L;
         RoomDTO roomDTO=new RoomDTO();
         roomDTO.setType("AC");
@@ -157,7 +156,7 @@ public class RoomServiceTest {
     }
 
     @Test
-    public void testUpdateRooms_RoomNotFound(){
+     void testUpdateRooms_RoomNotFound(){
         Long roomId=1L;
         RoomDTO roomDTO=new RoomDTO();
         roomDTO.setPrice(1000L);
@@ -170,7 +169,7 @@ public class RoomServiceTest {
         verify(roomRepo,never()).save(any(Room.class));
     }
     @Test
-    public void testUpdateRooms_Exception(){
+     void testUpdateRooms_Exception(){
         Long roomId=1L;
         RoomDTO roomDTO=new RoomDTO();
         roomDTO.setPrice(1000L);
@@ -185,7 +184,7 @@ public class RoomServiceTest {
         verify(roomRepo,never()).save(any(Room.class));
     }
     @Test
-    public void testGetRoomById(){
+     void testGetRoomById(){
         Long roomId=1L;
         Room room=new Room();
         room.setName("Room No1");
@@ -199,7 +198,6 @@ public class RoomServiceTest {
         roomDTO.setAvailable(true);
         roomDTO.setType("AC");
         when(roomRepo.findById(roomId)).thenReturn(Optional.of(room));
-      //  when(room.getRoomDto()).thenReturn(roomDTO);
 
         RoomDTO result=service.getRoomById(roomId);
         assertNotNull(result);
@@ -208,7 +206,7 @@ public class RoomServiceTest {
         verify(roomRepo,times(1)).findById(roomId);
     }
     @Test
-    public void testGetRoomById_RoomNOtFound(){
+     void testGetRoomById_RoomNOtFound(){
         Long roomId=1L;
         when(roomRepo.findById(roomId)).thenReturn(Optional.empty());
         EntityNotFoundException exception=assertThrows( EntityNotFoundException.class,()->{
@@ -217,9 +215,8 @@ public class RoomServiceTest {
         assertEquals("Room Not found",exception.getMessage());
         verify(roomRepo,times(1)).findById(roomId);
     }
-
     @Test
-    public void testDeleteRoom_success(){
+     void testDeleteRoom_success(){
         Long roomId=1L;
         Room room=new Room();
         when(roomRepo.findById(roomId)).thenReturn(Optional.of(room));
@@ -227,7 +224,7 @@ public class RoomServiceTest {
         verify(roomRepo).deleteById(roomId);
     }
     @Test
-    public void testDeleteRoom_RoomNotFound(){
+     void testDeleteRoom_RoomNotFound(){
         Long roomId=1L;
         when(roomRepo.findById(roomId)).thenReturn(Optional.empty());
         EntityNotFoundException exception=assertThrows(EntityNotFoundException.class,()->{
@@ -237,7 +234,7 @@ public class RoomServiceTest {
         verify(roomRepo,never()).deleteById(roomId);
     }
     @Test
-    public void testDeleteRoom_Exception(){
+     void testDeleteRoom_Exception(){
         Long roomId=1L;
         when(roomRepo.findById(roomId)).thenThrow(new RuntimeException("Database Error"));
         Exception exception=assertThrows(RuntimeException.class,()->{
@@ -246,5 +243,4 @@ public class RoomServiceTest {
         assertEquals("Database Error",exception.getMessage());
         verify(roomRepo,never()).deleteById(roomId);
     }
-
 }

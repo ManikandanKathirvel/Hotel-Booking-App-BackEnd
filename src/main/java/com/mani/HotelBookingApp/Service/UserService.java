@@ -27,7 +27,7 @@ public class UserService {
         if (adminAcc.isEmpty()) {
             User user = new User();
             user.setEmail("mani@123");
-            user.setUsername("manik");
+            user.setUsername("manikm");
             user.setUserRole(UserRole.ADMIN);
             user.setPassword(new BCryptPasswordEncoder(12).encode("mani123"));//NOSONAR
             repo.save(user);

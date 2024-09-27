@@ -9,7 +9,7 @@ public class UserDTO {
     private String password;
     private UserRole userRole;
 
-    public UserDTO(String password) {
+    public UserDTO() {
     }
 
     public String getPassword() {

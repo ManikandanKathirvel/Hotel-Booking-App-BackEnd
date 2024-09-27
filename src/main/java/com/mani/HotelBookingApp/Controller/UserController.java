@@ -61,6 +61,7 @@ public class UserController {
             throw new BadCredentialsException("incorrect email or password");
         }
         final UserDetails userDetails = serviceimpl.userDetailsService().loadUserByUsername(authenticationRequest.getEmail());
+        System.out.println(userDetails.getUsername());
         Optional<User> optionalUser = service.findByEmail(userDetails.getUsername());
         final String jwt = jwtUtils.generateToken(userDetails);
 

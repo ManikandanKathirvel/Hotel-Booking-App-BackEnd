@@ -19,7 +19,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.*;
 
-public class ReservationControllerTest {
+ class ReservationControllerTest {
     @InjectMocks
     private ReservationController reservationController;
     @Mock
@@ -29,7 +29,7 @@ public class ReservationControllerTest {
         MockitoAnnotations.openMocks(this);
     }
     @Test
-    protected void testGetAllReservation_success() throws IllegalArgumentException, IllegalArgumentException {
+     void testGetAllReservation_success() throws IllegalArgumentException {
         int pageNo=0;
         ReservationResponseDto reservationResponseDto= new ReservationResponseDto();
         reservationResponseDto.setReservationDto(List.of(
@@ -39,12 +39,12 @@ public class ReservationControllerTest {
         reservationResponseDto.setTotalPages(1);
         when(reservationService.getAllReservation(pageNo)).thenReturn(reservationResponseDto);
         ResponseEntity<?> response=reservationController.getAllReservation(pageNo);
-        assertEquals(200, response.getStatusCodeValue());
+        assertEquals(200, response.getStatusCodeValue());//NOSONAR
         assertEquals(reservationResponseDto,response.getBody());
         verify(reservationService,times(1)).getAllReservation(pageNo);
     }
     @Test
-    public void testGetAllReservation_withInvalidPageNo(){
+     void testGetAllReservation_withInvalidPageNo(){
         int invalidPageNo=-1;
         Exception exception=assertThrows(IllegalArgumentException.class,()->{
             reservationController.getAllReservation(invalidPageNo);
@@ -53,7 +53,7 @@ public class ReservationControllerTest {
         verify(reservationService,times(0)).getAllReservation(invalidPageNo);
     }
     @Test
-    public void testGetAllReservation_exceptionHandling(){
+     void testGetAllReservation_exceptionHandling(){
         int pageNo =0;
         when(reservationService.getAllReservation(pageNo)).thenThrow(new RuntimeException("Service error"));
         Exception exception=assertThrows(IllegalArgumentException.class,()->{
@@ -63,7 +63,7 @@ public class ReservationControllerTest {
         verify(reservationService,times(1)).getAllReservation(pageNo);
     }
     @Test
-    public void testChangeReservationStatus_Success() throws IllegalArgumentException {
+     void testChangeReservationStatus_Success() throws IllegalArgumentException {
         Long reservationId=0L;
         String status="approved";
         when(reservationService.changeReservationStatus(reservationId,status)).thenReturn(true);
@@ -71,9 +71,8 @@ public class ReservationControllerTest {
         assertEquals(HttpStatus.OK,response.getStatusCode());
         verify(reservationService,times(1)).changeReservationStatus(reservationId,status);
     }
-
     @Test
-    public void testChangeReservationStatus_invalid() throws IllegalArgumentException {
+     void testChangeReservationStatus_invalid() {
         Long reservationId = 0L;
         String status = "INVALID";
         when(reservationService.changeReservationStatus(reservationId, status)).thenReturn(false);
@@ -83,6 +82,4 @@ public class ReservationControllerTest {
         assertEquals("Invalid reservation ID", exception.getMessage());
         verify(reservationService, times(1)).changeReservationStatus(reservationId, status);
     }
-
-
 }
