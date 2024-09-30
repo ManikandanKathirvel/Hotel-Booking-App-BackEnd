@@ -61,7 +61,6 @@ public class BookingService {
         reservationResponseDto.setPageNo(reservationPage.getPageable().getPageNumber());
         reservationResponseDto.setTotalPages(reservationPage.getTotalPages());
         return reservationResponseDto;
-
     }
 
 }
