@@ -17,7 +17,6 @@ import java.util.stream.Collectors;
 
 @Service
 public class ReservationService {
-
     private final ReservationRepo reservationRepo;
     private final RoomRepo repo;
 
@@ -25,7 +24,9 @@ public class ReservationService {
         this.reservationRepo = reservationRepo;
         this.repo = repo;
     }
+
     public static final int SEARCH_RESULT_PER_PAGE = 4;
+
     public ReservationResponseDto getAllReservation(int pageNo) {
         Pageable pageable = PageRequest.of(pageNo, SEARCH_RESULT_PER_PAGE);
         Page<Reservation> reservationPage = reservationRepo.findAll(pageable);

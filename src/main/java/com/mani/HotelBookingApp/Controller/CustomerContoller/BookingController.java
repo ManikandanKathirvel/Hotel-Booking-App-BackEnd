@@ -25,10 +25,10 @@ public class BookingController {
         throw new IllegalArgumentException("Request Invalid");
     }
     @GetMapping("/bookings/{userId}/{pageNo}")
-    public  ResponseEntity<?> getAllBookingUserId(@PathVariable Long userId,@PathVariable int pageNo) throws ResourceNotFoundException {
-        try{
-            return  ResponseEntity.ok(bookingService.getAllReservationByUserId(userId,pageNo));
-        }catch (Exception e){
+    public ResponseEntity<?> getAllBookingUserId(@PathVariable Long userId, @PathVariable int pageNo) throws ResourceNotFoundException {
+        try {
+            return ResponseEntity.ok(bookingService.getAllReservationByUserId(userId, pageNo));
+        } catch (Exception e) {
             throw new ResourceNotFoundException("Resource Not Found");
         }
     }

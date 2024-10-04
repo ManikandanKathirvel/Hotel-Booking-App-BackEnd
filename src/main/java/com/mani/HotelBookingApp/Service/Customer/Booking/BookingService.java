@@ -20,11 +20,10 @@ import java.util.stream.Collectors;
 
 @Service
 public class BookingService {
-
     private final ReservationRepo reservationRepo;
     private final UserRepo userRepo;
     private final RoomRepo roomRepo;
-    private static final int SEARCH_RESULT_PER_PAGE=4;
+    private static final int SEARCH_RESULT_PER_PAGE = 4;
 
     public BookingService(ReservationRepo reservationRepo, UserRepo userRepo, RoomRepo roomRepo) {
         this.reservationRepo = reservationRepo;
@@ -53,14 +52,14 @@ public class BookingService {
         }
         return false;
     }
-    public ReservationResponseDto getAllReservationByUserId(Long userId, int pageNo){
+
+    public ReservationResponseDto getAllReservationByUserId(Long userId, int pageNo) {
         Pageable pageable = PageRequest.of(pageNo, SEARCH_RESULT_PER_PAGE);
-        Page<Reservation> reservationPage = reservationRepo.findAllByUserId(pageable,userId);
+        Page<Reservation> reservationPage = reservationRepo.findAllByUserId(pageable, userId);
         ReservationResponseDto reservationResponseDto = new ReservationResponseDto();
         reservationResponseDto.setReservationDto(reservationPage.stream().map(Reservation::getReservationDto).collect(Collectors.toList()));
         reservationResponseDto.setPageNo(reservationPage.getPageable().getPageNumber());
         reservationResponseDto.setTotalPages(reservationPage.getTotalPages());
         return reservationResponseDto;
     }
-
 }

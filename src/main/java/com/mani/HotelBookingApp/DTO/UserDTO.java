@@ -12,6 +12,9 @@ public class UserDTO {
     public UserDTO() {
     }
 
+    public UserDTO(String username, String email) {
+    }
+
     public String getPassword() {
         return password;
     }

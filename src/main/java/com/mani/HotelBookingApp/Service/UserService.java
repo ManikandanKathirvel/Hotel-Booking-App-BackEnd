@@ -14,7 +14,6 @@ import java.util.Optional;
 
 @Service
 public class UserService {
-
     private final UserRepo repo;
 
     public UserService(UserRepo repo) {
@@ -35,7 +34,6 @@ public class UserService {
             System.out.println("acc already exist");//NOSONAR
         }
     }
-
     public UserDTO createUser(SignupRequest request) {
         if (repo.findByEmail(request.getEmail()).isPresent()) {
             throw new EntityExistsException("user Already Present with username" + request.getEmail());
@@ -48,10 +46,7 @@ public class UserService {
         User create = repo.save(user);
         return create.getUserdto();
     }
-
     public Optional<User> findByEmail(String email) {
-        System.out.println(email);//NOSONAR
-        System.out.println(repo.findByEmail(email));//NOSONAR
         return repo.findByEmail(email);
     }
 }

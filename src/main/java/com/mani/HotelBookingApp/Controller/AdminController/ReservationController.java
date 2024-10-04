@@ -14,21 +14,24 @@ import org.springframework.web.bind.annotation.*;
 @CrossOrigin("http://localhost:4200")
 public class ReservationController {
     private final ReservationService reservationService;
+
     public ReservationController(ReservationService reservationService) {
         this.reservationService = reservationService;
     }
+
     @GetMapping("/reservation/{pageNo}")
     public ResponseEntity<?> getAllReservation(@PathVariable int pageNo) throws IllegalArgumentException {
         if (pageNo < 0) {
             throw new IllegalArgumentException("Invalid status or reservation ID");
         }
         try {
-            ReservationResponseDto reservationResponseDto=reservationService.getAllReservation(pageNo);
+            ReservationResponseDto reservationResponseDto = reservationService.getAllReservation(pageNo);
             return ResponseEntity.ok(reservationResponseDto);
         } catch (Exception e) {
             throw new IllegalArgumentException("Invalid status or reservation ID");
         }
     }
+
     @GetMapping("/res/{id}/{status}")
     public ResponseEntity<?> changeReservationStatus(@PathVariable Long id, @PathVariable String status) throws IllegalArgumentException {
         boolean success = reservationService.changeReservationStatus(id, status);

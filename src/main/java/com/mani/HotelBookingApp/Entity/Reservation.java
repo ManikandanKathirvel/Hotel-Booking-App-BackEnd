@@ -28,8 +28,8 @@ public class Reservation {
     @OnDelete(action = OnDeleteAction.CASCADE)
     private User user;
 
-
-    public Reservation(){}
+    public Reservation() {
+    }
 
     public Reservation(Reservation reservation) {
     }
@@ -123,6 +123,5 @@ public class Reservation {
         reservationDto.setRoomType(room.getType());
 
         return reservationDto;
-
     }
 }

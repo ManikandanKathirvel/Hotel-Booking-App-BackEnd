@@ -14,6 +14,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,15 +25,9 @@ import java.util.Optional;
 @CrossOrigin("http://localhost:4200")
 @RequestMapping("/api")
 public class UserController {
-
     private final UserService service;
-
     private final AuthenticationManager manager;
-
-
     private final UserServiceimpl serviceimpl;
-
-
     private final JWTUtils jwtUtils;
 
     public UserController(UserService service, AuthenticationManager manager, UserServiceimpl serviceimpl, JWTUtils jwtUtils) {
@@ -72,6 +68,14 @@ public class UserController {
             response.setUserId(optionalUser.get().getId());
         }
         return ResponseEntity.status(HttpStatus.OK).body(response);
+    }
+
+    @GetMapping("/user-info")
+    public ResponseEntity<?> getUserInfo() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        User user = (User) authentication.getPrincipal();
+        UserDTO userDTO = new UserDTO(user.getUsername(), user.getEmail());
+        return ResponseEntity.status(HttpStatus.OK).body(userDTO);
     }
 
 

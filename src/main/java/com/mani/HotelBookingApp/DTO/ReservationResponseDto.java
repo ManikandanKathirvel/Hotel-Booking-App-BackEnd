@@ -9,7 +9,9 @@ public class ReservationResponseDto {
 
     public ReservationResponseDto(String date, String date1, int i, String pending, int i1, String smallRoom, String roomNo6, int i2, String mail) {
     }
-    public ReservationResponseDto(){}
+
+    public ReservationResponseDto() {
+    }
 
     public Integer getTotalPages() {
         return totalPages;

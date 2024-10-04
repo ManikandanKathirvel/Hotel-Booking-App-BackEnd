@@ -15,7 +15,6 @@ import java.util.stream.Collectors;
 
 @Service
 public class RoomService {
-
     private final RoomRepo repo;
 
     public RoomService(RoomRepo repo) {

@@ -14,12 +14,11 @@ import javax.print.DocFlavor;
 public class CustomerRoom {
     @Autowired
     CustomerRoomService service;
-
     @GetMapping("/getroom/{pageNumber}")
     public ResponseEntity<?> getAvailableRoom(@PathVariable int pageNumber) throws IllegalArgumentException {
-        try{
+        try {
             return ResponseEntity.ok(service.getAvailableRoom(pageNumber));
-        }catch (Exception e) {
+        } catch (Exception e) {
             throw new IllegalArgumentException("Something went wrong");
         }
     }

@@ -19,7 +19,9 @@ public class Room {
 
     public Room(String s, double v, String deluxe, boolean b) {
     }
-    public Room(){}
+
+    public Room() {
+    }
 
     public Long getId() {
         return id;

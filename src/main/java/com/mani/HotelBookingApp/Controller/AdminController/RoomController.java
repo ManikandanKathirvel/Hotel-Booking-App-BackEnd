@@ -32,7 +32,7 @@ public class RoomController {
 
     @GetMapping("/rooms/{pageNumber}")
     public ResponseEntity<?> getAllRoom(@PathVariable int pageNumber) {
-        if(pageNumber==-1){
+        if (pageNumber == -1) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Invalid Room Data");
         }
         return ResponseEntity.ok(service.getAllRooms(pageNumber));

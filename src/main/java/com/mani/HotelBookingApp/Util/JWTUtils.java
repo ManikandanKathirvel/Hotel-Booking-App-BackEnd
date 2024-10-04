@@ -19,24 +19,22 @@ import java.util.function.Function;
 public class JWTUtils {
     private String securityKey = "";
 
-    public JWTUtils() {
-
+    public JWTUtils() throws NoSuchAlgorithmException {
         try {
             KeyGenerator keygen = KeyGenerator.getInstance("HmacSHA256");
             SecretKey sk = keygen.generateKey();
             securityKey = Base64.getEncoder().encodeToString(sk.getEncoded());
-
         } catch (NoSuchAlgorithmException e) {
-            throw new NoSuchElementException(e);
+            throw new NoSuchAlgorithmException(e.getMessage());
         }
     }
 
     public String generateToken(Map<String, Objects> extractClaim, UserDetails details) {
-        return Jwts.builder().setClaims(extractClaim)//NOSONAR
-                .setSubject(details.getUsername())//NOSONAR
-                .setIssuedAt(new Date(System.currentTimeMillis()))//NOSONAR
-                .setExpiration(new Date(System.currentTimeMillis() + 30 * 60 * 1000))//NOSONAR
-                .signWith(getSignKey(), SignatureAlgorithm.HS256).compact();//NOSONAR
+        return Jwts.builder().setClaims(extractClaim)
+                .setSubject(details.getUsername())
+                .setIssuedAt(new Date(System.currentTimeMillis()))
+                .setExpiration(new Date(System.currentTimeMillis() + 30 * 60 * 1000))
+                .signWith(getSignKey(), SignatureAlgorithm.HS256).compact();
     }
 
     public String generateToken(UserDetails details) {
@@ -50,9 +48,9 @@ public class JWTUtils {
 
     private Claims extractAllClaims(String token) {
         return Jwts.parser()
-                .setSigningKey(getSignKey())//NOSONAR
+                .setSigningKey(getSignKey())
                 .build()
-                .parseClaimsJwt(token)//NOSONAR
+                .parseClaimsJwt(token)
                 .getPayload();
     }
 
@@ -71,7 +69,6 @@ public class JWTUtils {
     private <T> T extractClaims(String token, Function<Claims, T> claimsResolver) {
         final Claims claims = extractAllClaims(token);
         return claimsResolver.apply(claims);
-
     }
 
     private Key getSignKey() {
