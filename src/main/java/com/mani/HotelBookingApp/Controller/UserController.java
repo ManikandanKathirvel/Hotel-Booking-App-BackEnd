@@ -1,14 +1,14 @@
 package com.mani.HotelBookingApp.Controller;//NOSONAR
 
-import com.mani.HotelBookingApp.DTO.AuthenticationResponse;
-import com.mani.HotelBookingApp.DTO.AuthenticationRequest;
-import com.mani.HotelBookingApp.DTO.SignupRequest;
-import com.mani.HotelBookingApp.DTO.UserDTO;
+import com.mani.HotelBookingApp.DTO.*;
 import com.mani.HotelBookingApp.Entity.User;
 import com.mani.HotelBookingApp.Service.Jwt.UserServiceimpl;
 import com.mani.HotelBookingApp.Service.UserService;
 import com.mani.HotelBookingApp.Util.JWTUtils;
 import jakarta.persistence.EntityExistsException;
+import org.apache.coyote.Request;
+import org.springframework.context.annotation.Scope;
+import org.springframework.data.annotation.Reference;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -37,7 +37,7 @@ public class UserController {
         this.jwtUtils = jwtUtils;
     }
 
-    @PostMapping("/signUp")
+    @RequestMapping(value = "/signUp",method = RequestMethod.POST)
     public ResponseEntity<?> signUp(@RequestBody SignupRequest signupRequest) {
         try {
             UserDTO dto = service.createUser(signupRequest);
@@ -48,7 +48,6 @@ public class UserController {
             return new ResponseEntity<>("Email id not available", HttpStatus.NOT_ACCEPTABLE);
         }
     }
-
     @PostMapping("/login")
     public ResponseEntity<AuthenticationResponse> createAuthenticationToken(@RequestBody AuthenticationRequest authenticationRequest) {
         try {
@@ -72,11 +71,21 @@ public class UserController {
 
     @GetMapping("/user-info")
     public ResponseEntity<?> getUserInfo() {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        User user = (User) authentication.getPrincipal();
-        UserDTO userDTO = new UserDTO(user.getUsername(), user.getEmail());
-        return ResponseEntity.status(HttpStatus.OK).body(userDTO);
+        Authentication authentication=SecurityContextHolder.getContext().getAuthentication();
+        Object principal = authentication.getPrincipal();
+        System.out.println("priciple :"+principal.getClass().getName());
+        System.out.println(principal);
+        User user;
+        if(principal instanceof UserDetails){
+            String username= ((UserDetails) principal).getUsername();
+            user=service.findByEmail(username).orElseThrow(()->new RuntimeException("User NOt Found"));
+            ResponseEntity.status(HttpStatus.OK).body(user);
+        } else if (principal instanceof UserDetails) {
+           ResponseEntity.status(HttpStatus.BAD_REQUEST).body("User not Authenticated");
+        }
+        else {
+           return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Unknown bPrinciple");
+        }
+        return ResponseEntity.ok().build();
     }
-
-
 }

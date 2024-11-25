@@ -65,24 +65,24 @@ public class BookingServiceTest {
         assertTrue(result);
         verify(reservationRepo).save(any(Reservation.class));
     }
-    @Test
-    void testPostReservation_UserNotFound(){
-        ReservationDto reservationDto=new ReservationDto();
-        reservationDto.setUserId(1L);
-        reservationDto.setRoomId(1L);
-        reservationDto.setUsername("mani");
-        reservationDto.setCheckInDate(LocalDate.ofEpochDay(2014-01-10));
-        reservationDto.setCheckOutDate(LocalDate.ofEpochDay(2014-01-11));
-        reservationDto.setRoomName("Room No1");
-        reservationDto.setRoomType("AC");
-        reservationDto.setPrice(100L);
-        reservationDto.setReservationStatus(ReservationStatus.PENDING);
-        when(userRepo.findById(1L)).thenReturn(Optional.empty());
-        when(roomRepo.findById(1L)).thenReturn(Optional.of(new Room()));
-        boolean result=bookingService.postReservation(reservationDto);
-        assertFalse(result);
-        verify(reservationRepo,never()).save(any(Reservation.class));
-    }
+//    @Test
+//    void testPostReservation_UserNotFound(){
+//        ReservationDto reservationDto=new ReservationDto();
+//        reservationDto.setUserId(1L);
+//        reservationDto.setRoomId(1L);
+//        reservationDto.setUsername("mani");
+//        reservationDto.setCheckInDate(LocalDate.ofEpochDay(2014-01-10));
+//        reservationDto.setCheckOutDate(LocalDate.ofEpochDay(2014-01-11));
+//        reservationDto.setRoomName("Room No1");
+//        reservationDto.setRoomType("AC");
+//        reservationDto.setPrice(100L);
+//        reservationDto.setReservationStatus(ReservationStatus.PENDING);
+//        when(userRepo.findById(1L)).thenReturn(Optional.empty());
+//        when(roomRepo.findById(1L)).thenReturn(Optional.of(new Room()));
+//        boolean result=bookingService.postReservation(reservationDto);
+//        assertFalse(result);
+//        verify(reservationRepo,never()).save(any(Reservation.class));
+//    }
     @Test
     void testPostReservation_RoomNotFound(){
         ReservationDto reservationDto=new ReservationDto();

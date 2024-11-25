@@ -36,7 +36,6 @@ public class JWTUtils {
                 .setExpiration(new Date(System.currentTimeMillis() + 30 * 60 * 1000))
                 .signWith(getSignKey(), SignatureAlgorithm.HS256).compact();
     }
-
     public String generateToken(UserDetails details) {
         return generateToken(new HashMap<>(), details);
     }

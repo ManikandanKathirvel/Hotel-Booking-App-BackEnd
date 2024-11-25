@@ -123,5 +123,5 @@ public class Reservation {
         reservationDto.setRoomType(room.getType());
 
         return reservationDto;
-    }
+    } 
 }

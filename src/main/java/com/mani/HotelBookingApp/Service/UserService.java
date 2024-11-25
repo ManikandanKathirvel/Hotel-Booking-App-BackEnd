@@ -49,4 +49,9 @@ public class UserService {
     public Optional<User> findByEmail(String email) {
         return repo.findByEmail(email);
     }
+
+    public User getUserInfo(Long id) {
+        return repo.findById(id).get();
+    }
+
 }

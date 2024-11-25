@@ -12,7 +12,7 @@ public class UserDTO {
     public UserDTO() {
     }
 
-    public UserDTO(String username, String email) {
+    public UserDTO(String username, String email, UserDTO userdto) {
     }
 
     public String getPassword() {
