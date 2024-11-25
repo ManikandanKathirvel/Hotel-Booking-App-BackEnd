@@ -10,7 +10,7 @@ services:
     environment:
       DB_HOST: db
       DB_PORT: 3306
-      DB_NAME: hotelBookingApp
+      DB_NAME: hotelbookingapp
       DB_USER: root
       DB_PASSWORD: root
     ports:
@@ -24,7 +24,7 @@ services:
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: root_password
-      MYSQL_DATABASE: hotelBookingApp
+      MYSQL_DATABASE: hotelbookingapp
       MYSQL_USER: root
       MYSQL_PASSWORD: root
     ports:
