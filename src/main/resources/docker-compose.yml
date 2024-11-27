@@ -2,7 +2,7 @@
 services:
   app:
     build:
-      context: .
+      context: C:\Users\Manikandan\IdeaProjects\HotelBookingApp\Dockerfile
       dockerfile: Dockerfile
     container_name: hotelbooking_app
     restart: always
