@@ -9,7 +9,6 @@ import jakarta.annotation.PostConstruct;
 import jakarta.persistence.EntityExistsException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-
 import java.util.Optional;
 
 @Service
@@ -53,5 +52,4 @@ public class UserService {
     public User getUserInfo(Long id) {
         return repo.findById(id).get();
     }
-
 }

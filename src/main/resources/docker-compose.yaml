@@ -1,4 +1,4 @@
-version: '3.9'
+version: '4.0'
 
 services:
   app:
@@ -29,9 +29,3 @@ services:
       MYSQL_PASSWORD: root
     ports:
       - "3306:3306"
-    volumes:
-      - db_data:/var/lib/mysql
-      - ./db_init:/docker-entrypoint-initdb.d
-
-volumes:
-  db_data:
