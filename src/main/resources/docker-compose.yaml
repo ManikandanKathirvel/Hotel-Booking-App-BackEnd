@@ -5,7 +5,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: hotelbookingss
+    container_name: hotelbooking_app
     restart: always
     environment:
       DB_HOST: db
@@ -20,7 +20,7 @@ services:
 
   db:
     image: mysql:8
-    container_name: hotelbookingss
+    container_name: hotelbooking_db
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: root_password
