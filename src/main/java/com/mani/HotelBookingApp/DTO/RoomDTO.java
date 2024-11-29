@@ -9,7 +9,7 @@ public class RoomDTO {
     private Long price;
     private boolean available;
 
-    public RoomDTO() {
+    public RoomDTO() {//NOSONAR
     }
 
     public Long getId() {

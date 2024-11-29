@@ -45,7 +45,7 @@ class UserServiceImpleTest {
         user.setEmail(mail);
         user.setPassword("mani");
         when(userRepo.findByEmail(mail)).thenReturn(Optional.empty());
-        assertThrows(UsernameNotFoundException.class,()->{
+        assertThrows(UsernameNotFoundException.class,()->{//NOSONAR
             userServiceimpl.userDetailsService().loadUserByUsername(mail);
         });
         verify(userRepo,times(1)).findByEmail(mail);

@@ -32,6 +32,7 @@ public class UserService {
             System.out.println("acc already exist");//NOSONAR
         }
     }
+
     public UserDTO createUser(SignupRequest request) {
         if (repo.findByEmail(request.getEmail()).isPresent()) {
             throw new EntityExistsException("user Already Present with username" + request.getEmail());
@@ -44,9 +45,8 @@ public class UserService {
         User create = repo.save(user);
         return create.getUserdto();
     }
+
     public Optional<User> findByEmail(String email) {
         return repo.findByEmail(email);
     }
-
-
 }

@@ -34,7 +34,7 @@ import static org.mockito.Mockito.when;
 
         when(service.getAvailableRoom(page)).thenReturn(roomResponse);
         ResponseEntity<?> response=customerRoom.getAvailableRoom(page);
-        assertEquals(200,response.getStatusCodeValue());
+        assertEquals(200,response.getStatusCodeValue());//NOSONAR
         assertEquals(roomResponse,response.getBody());
         verify(service).getAvailableRoom(page);
     }

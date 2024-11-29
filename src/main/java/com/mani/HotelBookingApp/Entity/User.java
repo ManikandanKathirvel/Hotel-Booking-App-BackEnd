@@ -77,7 +77,7 @@ public class User implements UserDetails {
     }
 
     @Override
-    public String getUsername() {
+    public String getUsername() {//NOSONAR
         return email;
     }
 

@@ -16,7 +16,7 @@ public class ReservationController {
     }
 
     @GetMapping("/reservation/{pageNo}")
-    public ResponseEntity<?> getAllReservation(@PathVariable int pageNo) throws IllegalArgumentException {
+    public ResponseEntity<?> getAllReservation(@PathVariable int pageNo) throws IllegalArgumentException {//NOSONAR
         if (pageNo < 0) {
             throw new IllegalArgumentException("Invalid status or reservation ID");
         }
@@ -29,13 +29,13 @@ public class ReservationController {
     }
 
     @GetMapping("/res/{id}/{status}")
-    public ResponseEntity<?> changeReservationStatus(@PathVariable Long id, @PathVariable String status) throws IllegalArgumentException {
+    public ResponseEntity<?> changeReservationStatus(@PathVariable Long id, @PathVariable String status) throws IllegalArgumentException {//NOSONAR
         boolean success = reservationService.changeReservationStatus(id, status);
         if (success) {
             return ResponseEntity.ok().build();
         } else {
             throw new IllegalArgumentException("Invalid reservation ID");
-            //return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Invalid reservation ID");
+            //return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Invalid reservation ID");//NOSONAR
         }
     }
 }

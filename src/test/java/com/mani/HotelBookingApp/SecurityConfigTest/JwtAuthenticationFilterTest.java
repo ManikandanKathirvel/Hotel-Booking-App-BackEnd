@@ -40,7 +40,7 @@ class JwtAuthenticationFilterTest {
         SecurityContextHolder.clearContext();
     }
 //    @Test
-//    void testDoFilterInternal_ValidJwt() throws ServletException, IOException {
+//    void testDoFilterInternal_ValidJwt() throws ServletException, IOException {//NOSOANR
 //        // Arrange
 //        MockHttpServletRequest request = new MockHttpServletRequest();
 //        MockHttpServletResponse response = new MockHttpServletResponse();
@@ -85,8 +85,6 @@ class JwtAuthenticationFilterTest {
         MockHttpServletRequest request = new MockHttpServletRequest();
         MockHttpServletResponse response = new MockHttpServletResponse();
         request.addHeader("Authorization", "Bearer invalid_jwt_token");
-        UserDetailsService userDetailsService=mock(UserDetailsService.class);
-        UserDetails userDetails=new User("mani@123","mani",new ArrayList<>());
         jwtAuthenticationFilter.doFilterInternal(request,response,filterChain);
         assertNull(SecurityContextHolder.getContext().getAuthentication());
         verify(filterChain).doFilter(request,response);

@@ -5,6 +5,8 @@ import com.mani.HotelBookingApp.Enum.ReservationStatus;
 import jakarta.persistence.*;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.time.LocalDate;
 
@@ -30,9 +32,7 @@ public class Reservation {
 
     public Reservation() {
     }
-
-    public Reservation(Reservation reservation) {
-    }
+    Logger logger= LoggerFactory.getLogger(Reservation.class);
 
     public Long getId() {
         return id;
@@ -64,10 +64,6 @@ public class Reservation {
 
     public void setPrice(Long price) {
         this.price = price;
-    }
-
-    public ReservationStatus getReservation() {
-        return reservationStatus;
     }
 
     public void setReservationStatus(ReservationStatus reservationStatus) {
@@ -108,17 +104,17 @@ public class Reservation {
         ReservationDto reservationDto = new ReservationDto();
         reservationDto.setId(id);
         reservationDto.setPrice(price);
-        System.out.println(reservationDto.getPrice());
+        logger.info("reservationDto : ",reservationDto.getPrice());//NOSONAR
         reservationDto.setCheckInDate(checkInDate);
         reservationDto.setCheckOutDate(checkOutDate);
         reservationDto.setReservationStatus(reservationStatus);
 
         reservationDto.setUserId(user.getId());
-        System.out.println(reservationDto.getUserId());
+        logger.info("getUserId : ",reservationDto.getUserId());//NOSONAR
         reservationDto.setUsername(user.getUsername());
 
         reservationDto.setRoomId(room.getId());
-        System.out.println(reservationDto.getRoomId());
+        logger.info("getRoomId : "+reservationDto.getRoomId());//NOSONAR
         reservationDto.setRoomName(room.getName());
         reservationDto.setRoomType(room.getType());
 

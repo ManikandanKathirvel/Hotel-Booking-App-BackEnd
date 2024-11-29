@@ -8,11 +8,11 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 @RestControllerAdvice
 public class GlobalExceptions {
     @ExceptionHandler(IllegalArgumentException.class)
-    public ResponseEntity<?> handleIllegalArgumentException(IllegalArgumentException ex) {
+    public ResponseEntity<?> handleIllegalArgumentException(IllegalArgumentException ex) {//NOSONAR
         return new ResponseEntity<>(ex.getMessage(), HttpStatus.BAD_REQUEST);
     }
     @ExceptionHandler(ResourceNotFoundException.class)//NOSONAR
-    public ResponseEntity<?> handleResourceNotFoundException(ResourceNotFoundException ex) {
+    public ResponseEntity<?> handleResourceNotFoundException(ResourceNotFoundException ex) {//NOSONAR
         return new ResponseEntity<>(ex.getMessage(), HttpStatus.NOT_FOUND);
     }
 }

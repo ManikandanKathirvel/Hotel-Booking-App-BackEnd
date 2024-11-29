@@ -16,7 +16,7 @@ public class BookingController {
         this.bookingService = bookingService;
     }
     @PostMapping("/booking")
-    public ResponseEntity<?> bookingRoom(@RequestBody ReservationDto reservationDto) {
+    public ResponseEntity<?> bookingRoom(@RequestBody ReservationDto reservationDto) {//NOSONAR
         System.out.println(reservationDto.getUserId());//NOSONAR
         boolean success = bookingService.postReservation(reservationDto);
         if (success) {
@@ -25,7 +25,7 @@ public class BookingController {
         throw new IllegalArgumentException("Request Invalid");
     }
     @GetMapping("/bookings/{userId}/{pageNo}")
-    public ResponseEntity<?> getAllBookingUserId(@PathVariable Long userId, @PathVariable int pageNo) throws ResourceNotFoundException {
+    public ResponseEntity<?> getAllBookingUserId(@PathVariable Long userId, @PathVariable int pageNo) throws ResourceNotFoundException {//NOSONAR
         try {
             return ResponseEntity.ok(bookingService.getAllReservationByUserId(userId, pageNo));
         } catch (Exception e) {

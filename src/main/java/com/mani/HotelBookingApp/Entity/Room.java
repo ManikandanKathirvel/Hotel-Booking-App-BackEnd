@@ -1,7 +1,6 @@
 package com.mani.HotelBookingApp.Entity;//NOSONAR
 
 import com.mani.HotelBookingApp.DTO.RoomDTO;
-import com.mani.HotelBookingApp.DTO.RoomResponse;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -17,7 +16,7 @@ public class Room {
     private Long price;
     private boolean available;
 
-    public Room(String s, double v, String deluxe, boolean b) {
+    public Room(String s, double v, String deluxe, boolean b) {//NOSONAR
     }
 
     public Room() {

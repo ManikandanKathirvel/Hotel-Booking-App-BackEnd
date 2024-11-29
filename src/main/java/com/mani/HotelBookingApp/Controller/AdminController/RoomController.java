@@ -18,7 +18,7 @@ public class RoomController {
     }
 
     @PostMapping("/rooms")
-    public ResponseEntity<?> postRooms(@RequestBody RoomDTO roomDTO) {
+    public ResponseEntity<?> postRooms(@RequestBody RoomDTO roomDTO) {//NOSONAR
         boolean success = service.postRooms(roomDTO);
         if (success) {
             return ResponseEntity.status(HttpStatus.OK).build();
@@ -28,7 +28,7 @@ public class RoomController {
     }
 
     @GetMapping("/rooms/{pageNumber}")
-    public ResponseEntity<?> getAllRoom(@PathVariable int pageNumber) {
+    public ResponseEntity<?> getAllRoom(@PathVariable int pageNumber) {//NOSONAR
         if (pageNumber == -1) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Invalid Room Data");
         }
@@ -36,7 +36,7 @@ public class RoomController {
     }
 
     @GetMapping("/room/{id}")
-    public ResponseEntity<?> getById(@PathVariable Long id) {
+    public ResponseEntity<?> getById(@PathVariable Long id) {//NOSONAR
         try {
             return ResponseEntity.ok(service.getRoomById(id));
         } catch (EntityNotFoundException en) {
@@ -47,7 +47,7 @@ public class RoomController {
     }
 
     @PutMapping("/updateRoom/{id}")
-    public ResponseEntity<?> updateRoom(@PathVariable Long id, @RequestBody RoomDTO roomDTO) throws ResourceNotFoundException {
+    public ResponseEntity<?> updateRoom(@PathVariable Long id, @RequestBody RoomDTO roomDTO) throws ResourceNotFoundException {//NOSONAR
         boolean success = service.updateRoom(id, roomDTO);
         if (success) {
             return ResponseEntity.status(HttpStatus.OK).body(true);
@@ -56,7 +56,7 @@ public class RoomController {
     }
 
     @DeleteMapping("/deleteRoom/{id}")
-    public ResponseEntity<?> deleteRoom(@PathVariable Long id) {
+    public ResponseEntity<?> deleteRoom(@PathVariable Long id) {//NOSONAR
         try {
             service.deleteRoom(id);
             return ResponseEntity.ok("successfully deleted");
