@@ -2,7 +2,7 @@ package com.mani.HotelBookingApp.ServiceTest;
 
 import com.mani.HotelBookingApp.Entity.User;
 import com.mani.HotelBookingApp.Repository.UserRepo;
-import com.mani.HotelBookingApp.Service.Jwt.UserServiceimpl;
+import com.mani.HotelBookingApp.Service.Jwt.UserServiceImpl;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -18,7 +18,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 class UserServiceImpleTest {
     @InjectMocks
-    UserServiceimpl userServiceimpl;
+    UserServiceImpl userServiceimpl;
     @Mock
     UserRepo userRepo;
     @BeforeEach

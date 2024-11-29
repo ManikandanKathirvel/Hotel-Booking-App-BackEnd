@@ -1,22 +1,11 @@
 package com.mani.HotelBookingApp.SecurityConfigTest;
 
-import com.mani.HotelBookingApp.Enum.UserRole;
 import com.mani.HotelBookingApp.SecurityConfig.JwtAuthenticationFilter;
 import com.mani.HotelBookingApp.SecurityConfig.WebConfig;
-import com.mani.HotelBookingApp.Service.Jwt.UserServiceimpl;
+import com.mani.HotelBookingApp.Service.Jwt.UserServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configurers.CsrfConfigurer;
-import org.springframework.security.config.annotation.web.configurers.SessionManagementConfigurer;
-import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -28,13 +17,13 @@ import static org.mockito.Mockito.*;
 public class WebConfigTest {
 
     private WebConfig webConfig;
-    private UserServiceimpl serviceimpl;
+    private UserServiceImpl serviceimpl;
     private JwtAuthenticationFilter jwtAuthenticationFilter;
     private HttpSecurity httpSecurity;
 
     @BeforeEach
     void setUp() throws Exception {
-        serviceimpl = mock(UserServiceimpl.class);
+        serviceimpl = mock(UserServiceImpl.class);
         jwtAuthenticationFilter = mock(JwtAuthenticationFilter.class);
         webConfig = new WebConfig(serviceimpl, jwtAuthenticationFilter);
         httpSecurity = mock(HttpSecurity.class);

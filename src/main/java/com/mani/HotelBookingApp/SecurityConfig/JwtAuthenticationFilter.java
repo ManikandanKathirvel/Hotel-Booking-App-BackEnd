@@ -1,6 +1,6 @@
 package com.mani.HotelBookingApp.SecurityConfig;//NOSONAR
 
-import com.mani.HotelBookingApp.Service.Jwt.UserServiceimpl;
+import com.mani.HotelBookingApp.Service.Jwt.UserServiceImpl;
 import com.mani.HotelBookingApp.Util.JWTUtils;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -20,9 +20,9 @@ import java.io.IOException;
 @Component
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
     private final JWTUtils jwtU;
-    private final UserServiceimpl service;
+    private final UserServiceImpl service;
 
-    public JwtAuthenticationFilter(JWTUtils jwtU, UserServiceimpl service) {
+    public JwtAuthenticationFilter(JWTUtils jwtU, UserServiceImpl service) {
         this.jwtU = jwtU;
         this.service = service;
     }

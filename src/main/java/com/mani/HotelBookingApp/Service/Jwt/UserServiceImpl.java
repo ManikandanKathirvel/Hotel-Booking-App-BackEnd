@@ -9,10 +9,10 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 @Service
-public class UserServiceimpl {
-    Logger logger= LoggerFactory.getLogger(UserServiceimpl.class);
+public class UserServiceImpl {
+    Logger logger= LoggerFactory.getLogger(UserServiceImpl.class);
     private final UserRepo repo;
-    public UserServiceimpl(UserRepo repo) {
+    public UserServiceImpl(UserRepo repo) {
         this.repo = repo;
     }
 

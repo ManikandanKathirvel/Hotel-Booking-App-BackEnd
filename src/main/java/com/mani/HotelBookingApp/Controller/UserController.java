@@ -2,7 +2,7 @@ package com.mani.HotelBookingApp.Controller;//NOSONAR
 
 import com.mani.HotelBookingApp.DTO.*;
 import com.mani.HotelBookingApp.Entity.User;
-import com.mani.HotelBookingApp.Service.Jwt.UserServiceimpl;
+import com.mani.HotelBookingApp.Service.Jwt.UserServiceImpl;
 import com.mani.HotelBookingApp.Service.UserService;
 import com.mani.HotelBookingApp.Util.JWTUtils;
 import jakarta.persistence.EntityExistsException;
@@ -26,11 +26,11 @@ import java.util.Optional;
 public class UserController {
     private final UserService service;
     private final AuthenticationManager manager;
-    private final UserServiceimpl serviceimpl;
+    private final UserServiceImpl serviceimpl;
     private final JWTUtils jwtUtils;
     Logger logger= LoggerFactory.getLogger(UserController.class);
 
-    public UserController(UserService service, AuthenticationManager manager, UserServiceimpl serviceimpl, JWTUtils jwtUtils) {
+    public UserController(UserService service, AuthenticationManager manager, UserServiceImpl serviceimpl, JWTUtils jwtUtils) {
         this.service = service;
         this.manager = manager;
         this.serviceimpl = serviceimpl;

@@ -6,7 +6,7 @@ import com.mani.HotelBookingApp.DTO.AuthenticationResponse;
 import com.mani.HotelBookingApp.DTO.SignupRequest;
 import com.mani.HotelBookingApp.DTO.UserDTO;
 import com.mani.HotelBookingApp.Entity.User;
-import com.mani.HotelBookingApp.Service.Jwt.UserServiceimpl;
+import com.mani.HotelBookingApp.Service.Jwt.UserServiceImpl;
 import com.mani.HotelBookingApp.Service.UserService;
 import com.mani.HotelBookingApp.Util.JWTUtils;
 import jakarta.persistence.EntityNotFoundException;
@@ -44,7 +44,7 @@ class UserControllerTest {
     @Mock
     UserDetailsService userDetailsService;
     @Mock
-    UserServiceimpl userServiceimpl;
+    UserServiceImpl userServiceimpl;
 
     @BeforeEach
     public void setUp(){

@@ -1,7 +1,7 @@
 package com.mani.HotelBookingApp.SecurityConfigTest;
 
 import com.mani.HotelBookingApp.SecurityConfig.JwtAuthenticationFilter;
-import com.mani.HotelBookingApp.Service.Jwt.UserServiceimpl;
+import com.mani.HotelBookingApp.Service.Jwt.UserServiceImpl;
 import com.mani.HotelBookingApp.Util.JWTUtils;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -12,7 +12,6 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.mock.web.MockHttpServletResponse;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -33,7 +32,7 @@ public class JwtAuthenticationFilterTest {
     private FilterChain filterChain;
 
     @Mock
-    private UserServiceimpl serviceimpl;
+    private UserServiceImpl serviceimpl;
 
     @BeforeEach
     public void setUp(){
