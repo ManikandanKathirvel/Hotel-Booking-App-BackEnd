@@ -9,6 +9,9 @@ import com.mani.HotelBookingApp.Enum.ReservationStatus;
 import com.mani.HotelBookingApp.Repository.ReservationRepo;
 import com.mani.HotelBookingApp.Repository.RoomRepo;
 import com.mani.HotelBookingApp.Repository.UserRepo;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.slf4j.Marker;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -23,6 +26,7 @@ public class BookingService {
     private final UserRepo userRepo;
     private final RoomRepo roomRepo;
     private static final int SEARCH_RESULT_PER_PAGE = 4;
+    Logger logger= LoggerFactory.getLogger(BookingService.class);
 
     public BookingService(ReservationRepo reservationRepo, UserRepo userRepo, RoomRepo roomRepo) {
         this.reservationRepo = reservationRepo;
@@ -33,10 +37,9 @@ public class BookingService {
     public boolean postReservation(ReservationDto reservationDto) {
         Optional<User> user = userRepo.findById(reservationDto.getUserId());
         Optional<Room> room = roomRepo.findById(reservationDto.getRoomId());
-        System.out.println("s,bgckuv bgjk");
         if (room.isPresent() && user.isPresent()) {
-            System.out.println(room.isPresent());
-            System.out.println(user.isPresent());
+            logger.info("room is present : "+ room.isPresent());
+            logger.info("user is present : "+user.isPresent());
             if (reservationDto.getCheckOutDate().isBefore(reservationDto.getCheckInDate())) {
                 return false;
             }

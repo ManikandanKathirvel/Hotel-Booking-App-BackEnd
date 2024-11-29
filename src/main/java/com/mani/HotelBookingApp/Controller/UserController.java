@@ -6,6 +6,8 @@ import com.mani.HotelBookingApp.Service.Jwt.UserServiceimpl;
 import com.mani.HotelBookingApp.Service.UserService;
 import com.mani.HotelBookingApp.Util.JWTUtils;
 import jakarta.persistence.EntityExistsException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -26,6 +28,7 @@ public class UserController {
     private final AuthenticationManager manager;
     private final UserServiceimpl serviceimpl;
     private final JWTUtils jwtUtils;
+    Logger logger= LoggerFactory.getLogger(UserController.class);
 
     public UserController(UserService service, AuthenticationManager manager, UserServiceimpl serviceimpl, JWTUtils jwtUtils) {
         this.service = service;
@@ -53,7 +56,7 @@ public class UserController {
             throw new BadCredentialsException("incorrect email or password");
         }
         final UserDetails userDetails = serviceimpl.userDetailsService().loadUserByUsername(authenticationRequest.getEmail());
-        System.out.println(userDetails.getUsername());
+        logger.info("uesr deatils : "+userDetails.getUsername());
         Optional<User> optionalUser = service.findByEmail(userDetails.getUsername());
         final String jwt = jwtUtils.generateToken(userDetails);
 
@@ -70,12 +73,12 @@ public class UserController {
     public ResponseEntity<?> getUserInfo() {
         Authentication authentication=SecurityContextHolder.getContext().getAuthentication();
         Object principal = authentication.getPrincipal();
-        System.out.println("priciple :"+principal.getClass().getName());
-        System.out.println(principal);
+        logger.info("priciple :"+principal.getClass().getName());
+        logger.info("priciple : "+principal);
         User user;
         if(principal instanceof UserDetails){
             String username= ((UserDetails) principal).getUsername();
-            user=service.findByEmail(username).orElseThrow(()->new RuntimeException("User NOt Found"));
+            user=service.findByEmail(username).orElseThrow(()->new RuntimeException("User Not Found"));
             ResponseEntity.status(HttpStatus.OK).body(user);
         } else if (principal instanceof UserDetails) {
            ResponseEntity.status(HttpStatus.BAD_REQUEST).body("User not Authenticated");
