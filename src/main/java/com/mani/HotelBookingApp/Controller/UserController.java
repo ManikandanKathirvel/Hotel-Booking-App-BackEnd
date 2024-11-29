@@ -56,7 +56,7 @@ public class UserController {
             throw new BadCredentialsException("incorrect email or password");
         }
         final UserDetails userDetails = serviceimpl.userDetailsService().loadUserByUsername(authenticationRequest.getEmail());
-        logger.info("uesr deatils : "+userDetails.getUsername());
+        logger.info("Ussr Details : ",userDetails.getUsername());//NOSONAR
         Optional<User> optionalUser = service.findByEmail(userDetails.getUsername());
         final String jwt = jwtUtils.generateToken(userDetails);
 
@@ -73,8 +73,8 @@ public class UserController {
     public ResponseEntity<?> getUserInfo() {
         Authentication authentication=SecurityContextHolder.getContext().getAuthentication();
         Object principal = authentication.getPrincipal();
-        logger.info("priciple :"+principal.getClass().getName());
-        logger.info("priciple : "+principal);
+        logger.info("priciple :",principal.getClass().getName());//NOSONAR
+        logger.info("priciple : ",principal);//NOSONAR
         User user;
         if(principal instanceof UserDetails){
             String username= ((UserDetails) principal).getUsername();

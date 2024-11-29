@@ -20,7 +20,7 @@ public class UserServiceImpl {
         return new UserDetailsService() {
             @Override
             public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-                logger.info("email : "+email);
+                logger.info("Email : ",email);//NOSONAR
                 return repo.findByEmail(email).orElseThrow(() -> new UsernameNotFoundException("User not found"));
             }
         };

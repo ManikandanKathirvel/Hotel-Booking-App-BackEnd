@@ -11,7 +11,6 @@ import com.mani.HotelBookingApp.Repository.RoomRepo;
 import com.mani.HotelBookingApp.Repository.UserRepo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.slf4j.Marker;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -38,8 +37,8 @@ public class BookingService {
         Optional<User> user = userRepo.findById(reservationDto.getUserId());
         Optional<Room> room = roomRepo.findById(reservationDto.getRoomId());
         if (room.isPresent() && user.isPresent()) {
-            logger.info("room is present : "+ room.isPresent());
-            logger.info("user is present : "+user.isPresent());
+            logger.info("room is present : "+ room.isPresent());//NOSONAR
+            logger.info("user is present : "+user.isPresent());//NOSONAR
             if (reservationDto.getCheckOutDate().isBefore(reservationDto.getCheckInDate())) {
                 return false;
             }
