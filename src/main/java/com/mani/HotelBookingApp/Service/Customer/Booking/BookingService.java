@@ -16,7 +16,6 @@ import org.springframework.stereotype.Service;
 
 import java.time.temporal.ChronoUnit;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 public class BookingService {
@@ -60,7 +59,7 @@ public class BookingService {
         Pageable pageable = PageRequest.of(pageNo, SEARCH_RESULT_PER_PAGE);
         Page<Reservation> reservationPage = reservationRepo.findAllByUserId(pageable, userId);
         ReservationResponseDto reservationResponseDto = new ReservationResponseDto();
-        reservationResponseDto.setReservationDto(reservationPage.stream().map(Reservation::getReservationDto).collect(Collectors.toList()));
+        reservationResponseDto.setReservationDto(reservationPage.stream().map(Reservation::getReservationDto).toList());
         reservationResponseDto.setPageNo(reservationPage.getPageable().getPageNumber());
         reservationResponseDto.setTotalPages(reservationPage.getTotalPages());
         return reservationResponseDto;

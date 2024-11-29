@@ -12,10 +12,7 @@ import org.springframework.web.bind.annotation.*;
 @CrossOrigin("http://localhost:4200")
 @RequestMapping("/api/admin")
 public class RoomController {
-
-
     private final RoomService service;
-
     public RoomController(RoomService service) {
         this.service = service;
     }

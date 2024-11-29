@@ -23,10 +23,9 @@ services:
     container_name: hotelbooking_db
     restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: root_password
+      MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: hotelbookingapp
-      MYSQL_USER: root
-      MYSQL_PASSWORD: root
+
     ports:
       - "3307:3306"
     healthcheck:

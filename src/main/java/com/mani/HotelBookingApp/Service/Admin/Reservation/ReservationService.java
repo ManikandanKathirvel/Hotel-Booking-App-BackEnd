@@ -19,7 +19,6 @@ import java.util.stream.Collectors;
 public class ReservationService {
     private final ReservationRepo reservationRepo;
     private final RoomRepo repo;
-
     public ReservationService(ReservationRepo reservationRepo, RoomRepo repo) {
         this.reservationRepo = reservationRepo;
         this.repo = repo;
@@ -31,7 +30,7 @@ public class ReservationService {
         Pageable pageable = PageRequest.of(pageNo, SEARCH_RESULT_PER_PAGE);
         Page<Reservation> reservationPage = reservationRepo.findAll(pageable);
         ReservationResponseDto reservationResponseDto = new ReservationResponseDto();
-        reservationResponseDto.setReservationDto(reservationPage.stream().map(Reservation::getReservationDto).collect(Collectors.toList()));
+        reservationResponseDto.setReservationDto(reservationPage.stream().map(Reservation::getReservationDto).toList());
         reservationResponseDto.setPageNo(reservationPage.getPageable().getPageNumber());
         reservationResponseDto.setTotalPages(reservationPage.getTotalPages());
         return reservationResponseDto;

@@ -19,8 +19,7 @@ import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
-
-public class UserServiceTest {
+ class UserServiceTest {
     @InjectMocks
     UserService userService;
     @Mock
@@ -48,7 +47,6 @@ public class UserServiceTest {
         when(userRepo.save(any(User.class))).thenReturn(user);
         UserDTO dto=userService.createUser(signupRequest);
         dto.setUsername(signupRequest.getUsername());
-        //dto.setUsername(user.getUsername());
         assertNotNull(dto);
         assertEquals("mani",dto.getUsername());
         verify(userRepo).save(any(User.class));
@@ -136,7 +134,6 @@ public class UserServiceTest {
     @Test
     void testFindByEmail_UserDoesNotExist(){
         String mail="mani@9789";
-        User user=new User();
         when(userRepo.findByEmail(mail)).thenReturn(Optional.empty());
         Optional<User> result=userService.findByEmail(mail);
         assertFalse(result.isPresent());

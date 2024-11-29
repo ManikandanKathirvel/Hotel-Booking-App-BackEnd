@@ -11,12 +11,10 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 public class RoomService {
     private final RoomRepo repo;
-
     public RoomService(RoomRepo repo) {
         this.repo = repo;
     }
@@ -43,7 +41,7 @@ public class RoomService {
         RoomResponse roomResponse = new RoomResponse();
         roomResponse.setPageNumber(roomPage.getPageable().getPageNumber());
         roomResponse.setTotalPages(roomPage.getTotalPages());
-        roomResponse.setRoomDtoList(roomPage.getContent().stream().map(Room::getRoomDto).collect(Collectors.toList()));//NOSONAR
+        roomResponse.setRoomDtoList(roomPage.getContent().stream().map(Room::getRoomDto).toList());
         return roomResponse;
     }
 

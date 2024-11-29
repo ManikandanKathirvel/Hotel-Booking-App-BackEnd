@@ -10,7 +10,6 @@ import com.mani.HotelBookingApp.Service.Jwt.UserServiceimpl;
 import com.mani.HotelBookingApp.Service.UserService;
 import com.mani.HotelBookingApp.Util.JWTUtils;
 import jakarta.persistence.EntityNotFoundException;
-import org.hibernate.sql.ast.tree.expression.CaseSimpleExpression;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -29,7 +28,7 @@ import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
-public class UserControllerTest {
+class UserControllerTest {
     @InjectMocks
     private UserController userController;
     private AuthenticationRequest authRequest;

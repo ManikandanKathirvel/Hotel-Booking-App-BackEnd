@@ -11,7 +11,6 @@ public class GlobalExceptions {
     public ResponseEntity<?> handleIllegalArgumentException(IllegalArgumentException ex) {
         return new ResponseEntity<>(ex.getMessage(), HttpStatus.BAD_REQUEST);
     }
-
     @ExceptionHandler(ResourceNotFoundException.class)//NOSONAR
     public ResponseEntity<?> handleResourceNotFoundException(ResourceNotFoundException ex) {
         return new ResponseEntity<>(ex.getMessage(), HttpStatus.NOT_FOUND);
